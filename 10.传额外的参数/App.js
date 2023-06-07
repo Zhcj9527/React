@@ -1,10 +1,10 @@
 // 函数组件的创建
 function Hello () {
-  const clickHandler = (msg) => {
+  const clickHandler = (e, msg) => {
     console.log('函数组件的函数被触发啦..', msg)
   }
   // 需要传参是需要写成柯理化的形式    
-  return <div onClick={() => clickHandler('click msg')}>点我</div>
+  return <div onClick={(e) => clickHandler(e, 'click msg')}>点我</div>
 }
 // 渲染
 // 1. <Hello/> 2.<Hello></Hello>
