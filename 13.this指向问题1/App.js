@@ -2,6 +2,12 @@ import React from "react"
 
 //  this指向问题
 class Test extends React.Component {
+  // 通过这种方法去修正this
+  // 相当于在类组件的初始化阶段 就可以把回调函数 永远指向当前组件实例对象
+  constructor() {
+    super()
+    this.handler = this.handler.bind(this)
+  }
 
   handler () {
     console.log(this)  // this 是 undefined
@@ -9,11 +15,8 @@ class Test extends React.Component {
   }
 
   render () {
-    // render函数中的this 指向当前组件实例对象
     return (
-      // onClick={this.handler} =>  onClick={() => this.handler()}
-      // 写成箭头函数的形式，直接沿用父组件的this指向，render中的this
-      <button onClick={() => this.handler()}>click</button>
+      <button onClick={this.handler}>click</button>
     )
   }
 }
