@@ -1,45 +1,40 @@
-import React, { createContext } from "react"
+import React from "react"
 
-// 1. 导入createContext方法并执行
-const { Provider, Consumer } = createContext()
+function ListItem ({ item, delItem }) {
 
-// 爷孙组件传值
-function ComA () {
   return (
-    <div>
-      A
-      <ComC />
-    </div>
-  )
-}
-
-function ComC () {
-  return (
-    <div>
-      C
-      <Consumer>
-        {value => <span>{value}</span>}
-      </Consumer>
-    </div>
+    <>
+      <h3>{item.name}</h3>
+      <p>{item.price}</p>
+      <p>{item.info}</p>
+      <button onClick={() => delItem(item.id)}>删除</button>
+    </>
   )
 }
 
 // 父组件
 class App extends React.Component {
-  // 准备数据
+  // 列表数据
   state = {
-    message: 'this is message.'
+    list: [
+      { id: 1, name: '超级好吃的棒棒糖', price: 18.8, info: '开业大酬宾，全场8折' },
+      { id: 2, name: '超级好吃的大鸡腿', price: 34.2, info: '开业大酬宾，全场8折' },
+      { id: 3, name: '超级无敌的冰激凌', price: 14.2, info: '开业大酬宾，全场8折' }
+    ]
   }
-
+  // 给子组件传递函数
+  delItem = (id) => {
+    this.setState({
+      list: this.state.list.filter((item) => item.id !== id)
+    })
+  }
 
   render () {
     return (
-      // 使用Provider包裹根组件
-      <Provider value={this.state.message}>
-        <>
-          <ComA />
-        </>
-      </Provider>
+      <>
+        {/* <ListItem /> */}
+        {this.state.list.map((item) => <ListItem key={item.id} item={item} delItem={this.delItem} />)}
+      </>
     )
   }
 
