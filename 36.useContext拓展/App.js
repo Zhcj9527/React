@@ -1,7 +1,7 @@
-import React, { createContext, useState } from "react"
+import React, { useState } from "react"
 import { useContext } from "react"
 
-const context = createContext()
+import context from "./context"
 
 const ComA = () => {
   const count = useContext(context)

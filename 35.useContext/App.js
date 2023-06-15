@@ -1,10 +1,10 @@
-import React, { createContext, useState } from "react"
-import { useContext } from "react"
+import React, { useState } from "react"
+import { createContext, useContext } from "react"
 
-const context = createContext()
+const Context = createContext()
 
 const ComA = () => {
-  const count = useContext(context)
+  const count = useContext(Context)
   return (
     <div>
       This is A
@@ -14,7 +14,7 @@ const ComA = () => {
   )
 }
 const ComC = () => {
-  const count = useContext(context)
+  const count = useContext(Context)
   return (
     <div>
       C
@@ -26,12 +26,12 @@ const ComC = () => {
 const App = () => {
   const [count, setCount] = useState(0)
   return (
-    <context.Provider value={count}>
+    <Context.Provider value={count}>
       <div>
         <ComA />
       </div>
       <button onClick={() => setCount(count + 2)}>click me</button>
-    </context.Provider>
+    </Context.Provider>
   )
 }
 
